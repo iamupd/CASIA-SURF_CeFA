@@ -2,19 +2,23 @@ import argparse
 import os
 import torch
 import torchvision as tv
-from at_learner_core.utils import transforms
-from at_learner_core.configs import dict_to_namespace
-from at_learner_core.utils import transforms as transforms
-
-from at_learner_core.utils import joint_transforms as j_transforms
-from at_learner_core.utils import sequence_transforms as s_transforms
+import numpy as np
+#import transforms
+import random
+import numbers
+import types
+import collections
+import warnings
+from utils import transforms as transforms
+from utils import joint_transforms as j_transforms
+from utils import sequence_transforms as s_transforms
 from PIL import Image
+from torchvision.transforms import functional as F
 
 L = 16
 image_size = 112
 modality_list = ['stat_r1000', 'stat_r1']
 of_modality_list = ['optical_flow', 'optical_flow_start']
-
 test_seq_transform = tv.transforms.Compose([
     s_transforms.LinspaceTransform(L, key_list=['data']),
 ])
@@ -98,6 +102,30 @@ test_image_transform = tv.transforms.Compose([
 ])
 
 
+def list_to_namespace_list(l):
+    new_list = []
+    for list_v in l:
+        if isinstance(list_v, dict):
+            list_ns = argparse.Namespace()
+            dict_to_namespace(list_ns, list_v)
+            new_list.append(list_ns)
+        else:
+            new_list.append(list_v)
+    return new_list
+
+
+def dict_to_namespace(ns, d):
+    for k, v in d.items():
+        if isinstance(v, dict):
+            leaf_ns = argparse.Namespace()
+            ns.__dict__[k] = leaf_ns
+            dict_to_namespace(leaf_ns, v)
+        elif isinstance(v, list):
+            ns.__dict__[k] = list_to_namespace_list(v)
+        else:
+            ns.__dict__[k] = v
+
+
 def get_config(protocol_name):
     config = {
         'head_config': {
@@ -107,7 +135,7 @@ def get_config(protocol_name):
         },
 
         'checkpoint_config': {
-            'out_path': None,
+            'out_path': 'experiments/rgb_track/exp1_protocol_4_1',
             'save_frequency': 1,
         },
 
@@ -142,9 +170,9 @@ def get_config(protocol_name):
 
         'train_process_config': {
             'nthreads': 8,
-            'ngpu': 1,
+            'ngpu': 0,
             'batchsize': 32,
-            'nepochs': 5,
+            'nepochs': 1,
             'resume': None,
             'optimizer_config': {
                 'name': 'Adam',
@@ -194,6 +222,7 @@ def get_config(protocol_name):
     ns_conf = argparse.Namespace()
     dict_to_namespace(ns_conf, config)
     return ns_conf
+
 
 
 if __name__ == '__main__':

@@ -1,7 +1,6 @@
 import argparse
 import random
 import os
-
 import numpy as np
 import torch
 import torch.backends.cudnn as cudnn
@@ -17,7 +16,7 @@ def main():
                         help='Path to config .config file. Leave blank if loading from configs.py')
     
     arg_conf = parser.parse_args()
-    config = torch.load(arg_conf.config) if arg_conf.config else get_config()
+    config = get_config('protocol_4_1')
     
     print('===Options==')
     d = vars(config)

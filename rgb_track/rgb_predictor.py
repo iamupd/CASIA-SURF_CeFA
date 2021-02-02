@@ -1,6 +1,6 @@
-from at_learner_core.predictor import Predictor
-from models.wrappers.multi_modal_wrapper import MultiModalWrapper
-from at_learner_core.datasets.dataset_manager import DatasetManager
+from predictor import Predictor
+from multi_modal_wrapper import MultiModalWrapper
+from dataset_manager import DatasetManager
 import argparse
 import torch
 import os

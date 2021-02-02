@@ -1,0 +1,6 @@
+Epoch 0 results:
+Train Loss: Loss: 0.0954	
+Train Metric: THR: 0.5000, ACER: 0.0603, APCER: 0.0125, BPCER: 0.1081	
+Test Loss:  Loss: 0.0202	
+Test Metric:  
+THR: 0.5000, ACER: 0.0000, APCER: 0.0000, BPCER: 0.0000

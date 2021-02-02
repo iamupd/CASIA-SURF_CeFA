@@ -2,14 +2,14 @@ import argparse
 import os
 import torch
 import torchvision as tv
-from at_learner_core.configs import dict_to_namespace
-from at_learner_core.utils import sequence_transforms as s_transforms
+from configs import dict_to_namespace
+from utils import sequence_transforms as s_transforms
 
 def get_config(protocol_name):
     test_config = {
         'test_config_name': protocol_name,
         'out_path': None,
-        'ngpu': 1,
+        'ngpu': 0,
         'dataset_configs': {
             'dataset_name': 'VideoDataset',
             'datalist_path': '../data/dev_test_list.txt',
