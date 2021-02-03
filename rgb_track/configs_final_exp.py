@@ -172,7 +172,7 @@ def get_config(protocol_name):
             'nthreads': 8,
             'ngpu': 0,
             'batchsize': 32,
-            'nepochs': 1,
+            'nepochs': 5,
             'resume': None,
             'optimizer_config': {
                 'name': 'Adam',

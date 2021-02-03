@@ -4,3 +4,39 @@ Train Metric: THR: 0.5000, ACER: 0.0603, APCER: 0.0125, BPCER: 0.1081
 Test Loss:  Loss: 0.0202	
 Test Metric:  
 THR: 0.5000, ACER: 0.0000, APCER: 0.0000, BPCER: 0.0000
+Epoch 0 results:
+Train Loss: Loss: 0.0976	
+Train Metric: THR: 0.5000, ACER: 0.0610, APCER: 0.0128, BPCER: 0.1092	
+Test Loss:  Loss: 0.0334	
+Test Metric:  
+THR: 0.5000, ACER: 0.0150, APCER: 0.0100, BPCER: 0.0200
+Epoch 0 results:
+Train Loss: Loss: 0.0949	
+Train Metric: THR: 0.5000, ACER: 0.0594, APCER: 0.0137, BPCER: 0.1052	
+Test Loss:  Loss: 0.0298	
+Test Metric:  
+THR: 0.5000, ACER: 0.0150, APCER: 0.0100, BPCER: 0.0200
+Epoch 1 results:
+Train Loss: Loss: 0.0316	
+Train Metric: THR: 0.5000, ACER: 0.0178, APCER: 0.0033, BPCER: 0.0324	
+Test Loss:  Loss: 0.0134	
+Test Metric:  
+THR: 0.5000, ACER: 0.0050, APCER: 0.0000, BPCER: 0.0100
+Epoch 2 results:
+Train Loss: Loss: 0.0224	
+Train Metric: THR: 0.5000, ACER: 0.0129, APCER: 0.0038, BPCER: 0.0219	
+Test Loss:  Loss: 0.0085	
+Test Metric:  
+THR: 0.5000, ACER: 0.0050, APCER: 0.0100, BPCER: 0.0000
+Epoch 3 results:
+Train Loss: Loss: 0.0163	
+Train Metric: THR: 0.5000, ACER: 0.0085, APCER: 0.0025, BPCER: 0.0146	
+Test Loss:  Loss: 0.0172	
+Test Metric:  
+THR: 0.5000, ACER: 0.0100, APCER: 0.0100, BPCER: 0.0100
+Epoch 4 results:
+Train Loss: Loss: 0.0132	
+Train Metric: THR: 0.5000, ACER: 0.0077, APCER: 0.0025, BPCER: 0.0128	
+Test Loss:  Loss: 0.0120	
+Test Metric:  
+THR: 0.5000, ACER: 0.0100, APCER: 0.0000, BPCER: 0.0200

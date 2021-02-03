@@ -5,7 +5,7 @@ import torchvision as tv
 from configs import dict_to_namespace
 from utils import sequence_transforms as s_transforms
 
-def get_config(protocol_name):
+def get_test_config(protocol_name):
     test_config = {
         'test_config_name': protocol_name,
         'out_path': None,

@@ -4,7 +4,7 @@ import torch.nn.functional as F
 from itertools import combinations
 import numpy as np
 from transformer import TransformerEncoder
-
+import ipdb
 
 class MultiModalWrapper(nn.Module):
     def __init__(self, wrapper_config):
@@ -34,7 +34,7 @@ class MultiModalWrapper(nn.Module):
             nn.MaxPool2d(2),                                        # 64x12x12
 
             nn.Conv2d(64, 128, kernel_size=3, bias=False, stride=1),# 128x10x10
-            nn.BatchNorm2d(128),
+            nn.BatchNorm2d(32),
             nn.ReLU(),
             nn.MaxPool2d(2),                                        # 128x5x5
             nn.Conv2d(128, 256, kernel_size=5))                     # 256x1
@@ -57,7 +57,7 @@ class MultiModalWrapper(nn.Module):
             nn.MaxPool2d(2),
 
             nn.Conv2d(64, 128, kernel_size=3, bias=False, stride=1),
-            nn.BatchNorm2d(128),
+            nn.BatchNorm2d(32),
             nn.ReLU(),
             nn.MaxPool2d(2),
             nn.Conv2d(128, 256, kernel_size=5))
@@ -79,7 +79,7 @@ class MultiModalWrapper(nn.Module):
             nn.MaxPool2d(2),
 
             nn.Conv2d(64, 128, kernel_size=3, bias=False, stride=1),
-            nn.BatchNorm2d(128),
+            nn.BatchNorm2d(32),
             nn.ReLU(),
             nn.MaxPool2d(2),
             nn.Conv2d(128, 256, kernel_size=5))
@@ -101,7 +101,7 @@ class MultiModalWrapper(nn.Module):
             nn.MaxPool2d(2),
 
             nn.Conv2d(64, 128, kernel_size=3, bias=False, stride=1),
-            nn.BatchNorm2d(128),
+            nn.BatchNorm2d(32),
             nn.ReLU(),
             nn.MaxPool2d(2),
             nn.Conv2d(128, 256, kernel_size=5)) 
@@ -131,17 +131,10 @@ class MultiModalWrapper(nn.Module):
     #   out = out.view(out.size(0), -1))
  #       for idx, key in enumerate(self.input_modalities): 
  #           features[:, idx, :] = getattr(self, 'backbone_' + key)(x[key])
-        optical_flow = self.backbone_optical_flow(x['optical_flow'])
-        features[:, 0, :] = optical_flow.view(optical_flow.size(0), -1)
-
-        optical_flow_start = self.backbone_optical_flow_start(x['optical_flow_start'])
-        features[:, 1, :] = optical_flow_start.view(optical_flow_start.size(0), -1)
-
-        stat_r1000 = self.backbone_stat_r1000(x['stat_r1000'])
-        features[:, 2, :] = stat_r1000.view(stat_r1000.size(0), -1)
-
-        stat_r1 = self.backbone_stat_r1(x['stat_r1'])
-        features[:, 3, :] = stat_r1.view(stat_r1.size(0), -1)
+        features[:, 0, :] = self.backbone_optical_flow(x['optical_flow']).view(256, -1)
+        features[:, 1, :] = self.backbone_optical_flow_start(x['optical_flow_start']).view(256, -1)
+        features[:, 2, :] = self.backbone_stat_r1000(x['stat_r1000']).view(256, -1)
+        features[:, 3, :] = self.backbone_stat_r1(x['stat_r1']).view(256, -1)
 
         features = features.view((B, M, -1))
 
@@ -165,7 +158,6 @@ class MultiModalWrapper(nn.Module):
         return output_dict, loss
 
     def predict(self, x):
-        print('predict')
         features = self.backbone(x['data'])
         output = self.classifier(features)
         output_dict = {'output': output.detach().cpu()}
